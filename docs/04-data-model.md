@@ -1,8 +1,21 @@
-# 04 · Modelo de datos (PROPUESTA)
+# 04 · Modelo de datos
 
-> **Estado: ⏳ propuesta pendiente de aprobación.** Se revisa y aprueba al inicio de la
-> Fase 2 (BÚNKER), antes de escribir migraciones. Unifica las 9 tablas de la spec
-> original con los requisitos de procedencia e historial de [03](03-data-governance.md).
+> **Estado: ✅ aprobado por el operador (06/11/2026, P-11).** Unifica las 9 tablas de la
+> spec original con los requisitos de procedencia e historial de [03](03-data-governance.md).
+>
+> Las tablas se crean **por fases**, con una migración cuando el código que las usa existe
+> (no se crea esquema sin uso ni pruebas):
+>
+> | Fase | Tablas | Estado |
+> | --- | --- | --- |
+> | 2 BÚNKER | `sources`, `source_sync_states`, `sync_jobs`, `sync_job_results`, `intel_items`, `intel_item_tags` | ✅ Migradas |
+> | 4 RECONOCIMIENTO | `intel_item_analyses` | ⏳ |
+> | 5 ARSENAL | `game_entities`, `entity_aliases`, detalle por tipo, `stat_observations`, `price_observations`, `evidence`, `builds`, `tier_lists`, `review_tasks`, mapas | ⏳ |
+> | 6–7 | `raids`, `deaths`, `reports`, `report_sources` | ⏳ |
+>
+> Cambios respecto a la propuesta, aplicados en la Fase 2: `sync_jobs.status` incluye
+> `queued`; `source_sync_states` añade `consecutive_failures` (alerta tras N fallos);
+> `access_method` admite `json`.
 
 ## 1. Decisión de diseño
 
@@ -22,7 +35,7 @@ Así se cumplen a la vez: historial preservado, discrepancias sin promediar y pr
 
 | Tabla | Propósito | Campos clave |
 | --- | --- | --- |
-| `sources` | Catálogo de fuentes | `key` (único), `name`, `base_url`, `source_type`, `trust_level` (A–E), `access_method` (`api`/`rss`/`html`/`manual`), `game_version`, `region`, `language`, `status` (`active`/`unavailable`/`restricted`/`deprecated`/`pending_review`), `terms_reviewed`, `automation_enabled`, `notes` |
+| `sources` | Catálogo de fuentes | `key` (único), `name`, `base_url`, `source_type`, `trust_level` (A–E), `access_method` (`api`/`rss`/`json`/`html`/`manual`), `game_version`, `region`, `language`, `status` (`active`/`unavailable`/`restricted`/`deprecated`/`pending_review`), `terms_reviewed`, `automation_enabled`, `notes` |
 | `source_sync_states` | Cursor incremental por fuente (1:1 con `sources`) | `last_attempt_at`, `last_success_at`, `last_seen_published_at`, `cursor`, `status`, `last_error` |
 | `sync_jobs` | Cada ejecución (botón o cron) | `trigger` (`manual`/`scheduled`), `status` (`running`/`success`/`partial`/`failed`), `started_at`, `finished_at`, `range_from` |
 | `sync_job_results` | Resultado por fuente dentro de un job | `sync_job_id`, `source_id`, `status`, `items_created`, `items_updated`, `duplicates_skipped`, `error`, `duration_ms` |
@@ -81,8 +94,9 @@ raids 1─N deaths
 - Exportación conserva IDs, relaciones, unidades, procedencia, estados y fechas; importación idempotente (upsert por clave natural).
 - Cada cambio de esquema: migración + prueba + nota en el informe de fase.
 
-## 5. Preguntas abiertas para aprobar en Fase 2
+## 5. Preguntas resueltas
 
-1. ¿Aceptas el modelo de **observaciones** (más tablas, historial completo) en lugar de columnas fijas?
-2. ¿`evidence` polimórfica (`observation_type` + `observation_id`) o una tabla de evidencia por tipo de observación?
-3. ¿Mapas y extracciones entran ya en la Fase 2 o se dejan para después?
+1. Modelo de **observaciones** (más tablas, historial completo): ✅ aprobado.
+2. `evidence` polimórfica o una tabla por tipo: se decide en la Fase 5 con los datos reales delante
+   (recomendación inicial: una tabla por tipo, porque permite claves foráneas reales).
+3. Mapas y extracciones: Fase 5.

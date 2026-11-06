@@ -12,7 +12,7 @@ No existe una API pública oficial del juego: todo sale de fuentes web públicas
 | Prioridad | Fuente | Nivel | Método | Veredicto |
 | --- | --- | --- | --- | --- |
 | 1 | Steam News API | A | API oficial documentada | ✅ **Automatizar** |
-| 2 | CMS del sitio oficial | A | API JSON pública (no documentada) | ⚠️ **Automatizar con cautela** (requiere aprobación P-04) |
+| 2 | CMS del sitio oficial | A | API JSON pública (no documentada) | ✅ **Automatizar con cautela** (aprobado por el operador, D-27) |
 | 3 | ABI Field Index | B | JSON estático permitido | ✅ **Automatizar** (con aviso de desactualización) |
 | 4 | YouTube Data API v3 | A/D | API oficial con API key | ✅ **Automatizar** (necesita API key gratuita) |
 | 5 | Discord oficial (Follow → servidor propio) | A | Bot oficial en servidor propio | ⏳ Semiautomático, opcional |
@@ -55,12 +55,16 @@ El listado `arenabreakoutinfinite.com/es/list.html` se carga con el SDK público
 | Valor | Trae comunicados que **no** están en Steam (ej. actualización del 27/10, aviso del 03/11) |
 
 **Riesgos y reglas de uso:**
+
 - Endpoint **no documentado**: puede cambiar sin aviso → validación estricta del esquema y
   *circuit breaker* (si la respuesta no cumple el esquema, la fuente pasa a `restricted` y no se reintenta).
 - El EULA de Level Infinite prohíbe "bots… automation programs that interact with the
   Services". Va dirigido al juego, pero el texto es amplio. Por eso: **frecuencia baja
   (cada 3–6 h)**, solo leer noticias públicas, guardar título/fecha/extracto/enlace y
-  **no** republicar el contenido completo. **Requiere aprobación explícita del operador (P-04).**
+  **no** republicar el contenido completo. **Aprobado por el operador el 06/11/2026 (D-27).**
+
+> El catálogo que carga la base de datos está en [`data/knowledge/sources.json`](../data/knowledge/sources.json)
+> (`pnpm db:seed:base`). Cualquier cambio de estado de una fuente se hace primero aquí y luego en ese archivo.
 
 ### 2.3 ABI Field Index — ✅ prioridad 3 (datos técnicos)
 

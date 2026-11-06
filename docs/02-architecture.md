@@ -22,8 +22,9 @@ Versiones comprobadas el **06/11/2026** (se fijan exactas en `package.json` / `p
 | Datos web | **TanStack Query** | 5.x | |
 | Gráficas | **Recharts** | 3.x | |
 | API | **Express** | 5.3 | |
-| ORM | **Sequelize** + `sequelize-cli` | 6.37 / 6.6 | Sequelize 7 sigue en *alpha* (7.0.0-alpha.48) → no se usa |
-| BD desarrollo | **SQLite** (`sqlite3`) | 6.x | |
+| ORM | **Sequelize** | 6.37.8 | Sequelize 7 sigue en *alpha* (7.0.0-alpha.48) → no se usa |
+| Migraciones y seeders | **Umzug** | 3.8.3 | En lugar de `sequelize-cli` (dependía de umzug 2). Ver [ADR-0003](adr/0003-umzug-migrations.md) |
+| BD desarrollo | **SQLite** (`sqlite3`) | 6.0.1 (SQLite 3.52) | Requiere `allowBuilds` para descargar su binario |
 | BD producción (opcional) | **PostgreSQL** (`pg`) | PostgreSQL 18 · `pg` 8.x | Se cambia solo con el `.env` |
 | Validación | **Zod** | 4.x | |
 | Variables de entorno (API) | `process.loadEnvFile` nativo de Node | — | Sin dependencia `dotenv`: Node 26 lo trae incorporado |
@@ -114,10 +115,12 @@ Helper ABI/
 │   │       ├── lib/             # API client, utils
 │   │       └── styles/          # Military Tailwind theme
 │   └── api/
-│       ├── .sequelizerc
 │       └── src/
-│           ├── server.ts
-│           ├── config/          # Database config per environment
+│           ├── server.ts        # Starts the API (refuses to start with pending migrations)
+│           ├── app.ts           # Express app factory (used by tests)
+│           ├── config/          # Env validation (Zod)
+│           ├── db/              # Sequelize connection, Umzug migrator, db CLI
+│           ├── domain/          # Controlled vocabularies (statuses, categories...)
 │           ├── models/
 │           ├── migrations/      # Versioned schema (only place the schema lives)
 │           ├── seeders/
@@ -127,7 +130,8 @@ Helper ABI/
 │           ├── controllers/
 │           ├── services/
 │           ├── validators/      # Zod schemas
-│           └── middlewares/     # Errors, internal auth, rate limit
+│           ├── middlewares/     # Errors, internal auth, JSON-only writes, rate limit
+│           └── test/            # Test helpers
 ├── services/                    # Python workers
 │   ├── pyproject.toml           # Dependencies (managed with uv)
 │   ├── recon/                   # Source connectors + runner

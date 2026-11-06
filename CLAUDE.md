@@ -49,6 +49,11 @@ Detalle y justificación: `docs/02-architecture.md` y `docs/adr/0001-latest-stab
 
 - `pnpm check` → formato, lint, tipos y pruebas (JS + Python). **Debe pasar antes de cada commit.**
 - `pnpm dev` (API :4000 + panel :5173) · `pnpm build` · `pnpm py:test` · `pnpm py:lint`.
+- Base de datos: `pnpm db:migrate` · `db:status` · `db:seed:base` · `db:seed:dev` · `db:seed:undo:dev`.
+  Cambios de esquema = **nueva migración** en `apps/api/src/migrations` (nunca editar una ya
+  aplicada), junto con su modelo y su prueba. Migraciones sin imports de modelos/constantes.
+- Fuentes: se cambian en `docs/05-sources.md` y `data/knowledge/sources.json` (validado con Zod).
+- API: contrato en `docs/11-api-reference.md` (JSON snake_case).
 - En PowerShell, recargar el PATH si una herramienta recién instalada no aparece:
   `$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')`.
 - Dependencias nuevas: versión exacta, sin excepciones a la antigüedad mínima de pnpm,

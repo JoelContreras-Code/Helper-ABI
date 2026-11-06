@@ -18,6 +18,7 @@
 | 8 | [08-roadmap.md](08-roadmap.md) | ¿En qué orden se construye y cuándo una fase está terminada? |
 | 9 | [09-research-prompts.md](09-research-prompts.md) | Prompts para investigar con IAs que tienen búsqueda web |
 | 10 | [10-decisions.md](10-decisions.md) | Decisiones tomadas y decisiones pendientes |
+| 11 | [11-api-reference.md](11-api-reference.md) | Endpoints de la API, formatos y códigos de error |
 
 Además:
 

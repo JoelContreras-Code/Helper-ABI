@@ -7,6 +7,7 @@
     2. Installs Python 3.15 through uv (does not touch the system Python).
     3. Creates .env.development from .env.example with a random INGEST_TOKEN.
     4. Installs JavaScript and Python dependencies.
+    5. Applies database migrations and loads the approved base data.
 
     Safe to run several times. Run from any folder:
         powershell -ExecutionPolicy Bypass -File ".\scripts\setup.ps1"
@@ -96,6 +97,12 @@ try {
     Write-Step 'Installing Python dependencies (uv sync)'
     uv sync --directory services
     if ($LASTEXITCODE -ne 0) { throw 'uv sync failed' }
+
+    Write-Step 'Preparing the development database (migrations + approved base data)'
+    pnpm db:migrate
+    if ($LASTEXITCODE -ne 0) { throw 'Database migrations failed' }
+    pnpm db:seed:base
+    if ($LASTEXITCODE -ne 0) { throw 'Base data load failed' }
 } finally {
     Pop-Location
 }

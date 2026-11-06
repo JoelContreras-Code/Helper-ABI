@@ -31,6 +31,13 @@ Las decisiones de arquitectura importantes tienen además su ADR en [`adr/`](adr
 | D-22 | 06/11/2026 | pnpm 12.18.0 instalado con npm (Node 25+ ya no trae Corepack); Python 3.15.2 gestionado por uv sin tocar el Python 3.14 del sistema | Fase 1 |
 | D-23 | 06/11/2026 | Se respeta la protección de antigüedad mínima de pnpm: sin excepciones; solo `esbuild` autorizado a ejecutar scripts de instalación | Fase 1 · ADR-0001 |
 | D-24 | 06/11/2026 | Correo de Git: se mantiene el de la cuenta conectada | Operador |
+| D-25 | 06/11/2026 | **Umzug 3** para migraciones y seeders en TypeScript, en lugar de `sequelize-cli` | Fase 2 · [ADR-0003](adr/0003-umzug-migrations.md) |
+| D-26 | 06/11/2026 | Modelo de datos aprobado; las tablas se crean por fases cuando su código existe | Operador (P-11) · 04 |
+| D-27 | 06/11/2026 | **Automatizar el CMS del sitio oficial aprobado** (cada 3–6 h, solo metadatos/extracto/enlace) | Operador (P-04) |
+| D-28 | 06/11/2026 | API en JSON snake_case; escrituras solo con `Content-Type: application/json` (protección CSRF básica) | Fase 2 · 11 |
+| D-29 | 06/11/2026 | YouTube queda deshabilitado en el catálogo hasta revisar los términos de la API de YouTube (Fase 4). Steam habilitado tras revisar sus términos | Fase 2 |
+| D-30 | 06/11/2026 | `db:migrate:undo` borra datos de las tablas revertidas → en producción exige `--yes-delete-data` | Fase 2 |
+| D-31 | 06/11/2026 | El catálogo de fuentes vive en `data/knowledge/sources.json` y se valida con Zod (la automatización exige términos revisados y fuente activa) | Fase 2 |
 
 ## 2. Contradicciones resueltas entre los documentos originales
 
@@ -54,7 +61,7 @@ Las decisiones de arquitectura importantes tienen además su ADR en [`adr/`](adr
 | P-01 | Región/servidor de referencia para precios | Fase 5 | — |
 | P-02 | Idioma prioritario de las fuentes (presentación: español) | Fase 4 | Fuentes en inglés + español |
 | P-03 | Temporada y parche de línea base | Fase 5 | — |
-| P-04 | ¿Se aprueba automatizar el **CMS del sitio oficial** (API no documentada; EULA de texto amplio)? | Fase 4 | Sí, con frecuencia baja (3–6 h) y solo metadatos/extracto/enlace (05 §2.2) |
+| ~~P-04~~ | ~~¿Automatizar el CMS del sitio oficial?~~ | — | ✅ Aprobado (D-27) |
 | P-05 | Canales de YouTube comunitarios (5–10) | Fase 4 | Empezar por el oficial (`UC4p7wn-3DHpKk_9hxftr0ag`) |
 | P-14 | Crear una `YOUTUBE_API_KEY` gratuita en Google Cloud | Fase 4 | Claude guía paso a paso |
 | P-15 | ¿Montar el seguimiento de anuncios de Discord en un servidor propio? | Fase 7 | Opcional |
@@ -63,6 +70,6 @@ Las decisiones de arquitectura importantes tienen además su ADR en [`adr/`](adr
 | P-08 | Campos obligatorios para aprobar munición, armaduras y precios | Fase 5 | — |
 | P-09 | Formato exacto del paquete de conocimiento | Fase 5 | Claude propone un JSON Schema |
 | P-10 | Pruebas reproducibles para validar el calculador balístico | Fase 6 | — |
-| P-11 | Aprobar el modelo de datos de [04](04-data-model.md) | Fase 2 | Aprobar |
+| ~~P-11~~ | ~~Aprobar el modelo de datos de [04](04-data-model.md)~~ | — | ✅ Aprobado (D-26) |
 | P-12 | Revisar términos de uso de las fuentes comunitarias | Fase 4 | Ya revisados por Claude (05 §2–3); el operador confirma |
 | ~~P-13~~ | ~~Instalar Node 26, Python 3.15, uv y actualizar pnpm~~ | — | ✅ Hecho en la Fase 1 |
