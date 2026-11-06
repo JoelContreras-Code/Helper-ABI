@@ -1,0 +1,14 @@
+# Generated / vendored
+pnpm-lock.yaml
+**/dist/
+**/coverage/
+**/node_modules/
+
+# Python is formatted with ruff
+services/
+
+# Documentation is written by hand (tables would be reflowed)
+*.md
+
+# Private data
+data/

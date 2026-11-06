@@ -1,0 +1,44 @@
+[project]
+name = "helper-abi-services"
+version = "0.1.0"
+description = "Python workers for Helper-ABI: source connectors (recon) and forensic analysis"
+readme = "README.md"
+requires-python = ">=3.15"
+dependencies = [
+    "pydantic-settings==2.16.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.2.0",
+    "ruff==0.17.4",
+]
+
+[tool.uv]
+# Application code, not a distributable library.
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers --strict-config"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # import sorting
+    "UP",  # modern syntax
+    "B",   # likely bugs
+    "SIM", # simplifications
+    "S",   # security (bandit)
+    "RUF", # ruff-specific
+]
+
+[tool.ruff.lint.per-file-ignores]
+# S101: assert is the point of tests. S105/S106: tests use obvious dummy tokens.
+"tests/**" = ["S101", "S105", "S106"]

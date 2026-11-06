@@ -9,8 +9,8 @@ del módulo forense (F-1…F-6) en **una sola secuencia**.
 | Fase | Nombre | Entregable | Incluye | Estado |
 | --- | --- | --- | --- | --- |
 | 0 | **VERIFICACIÓN** | Fuentes y entorno comprobados | I-1 (catálogo inicial) | ✅ Hecha · [informe](reports/phase-0-verification.md) |
-| 0.5 | **DOCTRINA** | Documentación consolidada, investigación de fuentes, repo Git | — | ✅ Hecha (pendiente de aprobación) |
-| 1 | **CIMIENTOS** | Monorepo pnpm, configuración, calidad, `.env.example`, scripts de Windows | — | ⏳ |
+| 0.5 | **DOCTRINA** | Documentación consolidada, investigación de fuentes, repo Git | — | ✅ Hecha |
+| 1 | **CIMIENTOS** | Monorepo pnpm, configuración, calidad, `.env.example`, scripts de Windows | — | ✅ Hecha (pendiente de aprobación) · [informe](reports/phase-1-foundations.md) |
 | 2 | **BÚNKER** | API Express + Sequelize + migraciones + seeders dev + `/api/ingest` + `/api/sync-jobs` | Aprobación del modelo (04) | ⏳ |
 | 3 | **PANEL** | React con layout, tema, navegación, estados vacíos/error, lista de inteligencia con datos dummy | — | ⏳ |
 | 4 | **RECONOCIMIENTO** | Runner Python + conectores + botón *Actualizar inteligencia* | I-2, I-3, I-4, I-5 | ⏳ |

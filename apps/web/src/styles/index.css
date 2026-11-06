@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+
+/* Military theme: dark olive + amber accents, monospace for data. */
+@theme {
+  --color-olive-50: #f4f6ee;
+  --color-olive-100: #e4e9d6;
+  --color-olive-300: #b4bf93;
+  --color-olive-400: #95a36d;
+  --color-olive-600: #5c6a3b;
+  --color-olive-700: #47522f;
+  --color-olive-800: #343c24;
+  --color-olive-900: #232918;
+  --color-olive-950: #14170e;
+
+  --font-mono: 'JetBrains Mono', 'Cascadia Mono', Consolas, ui-monospace, monospace;
+}
+
+body {
+  background-color: var(--color-olive-950);
+  color: var(--color-olive-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -27,6 +27,10 @@ Las decisiones de arquitectura importantes tienen además su ADR en [`adr/`](adr
 | D-18 | 06/11/2026 | El perfil del operador (arma, niveles, economía) es configuración, no texto fijo en prompts | 01 §2 |
 | D-19 | 06/11/2026 | **ABI Field Index** (`/data/ammo.json`, `/data/armor.json`) es la fuente técnica automatizada principal, nivel B, con aviso de posible desactualización | Investigación · 05 §2.3 |
 | D-20 | 06/11/2026 | Fuentes con ToS que prohíben automatización (SenseOS), datos cifrados (ABI Tracker) o anti-bot (arenabreakout-infinite.com) → solo manuales | 05 §3–4 |
+| D-21 | 06/11/2026 | Node actualizado **globalmente** a 26.13.0 con winget (no gestor de versiones) | Operador |
+| D-22 | 06/11/2026 | pnpm 12.18.0 instalado con npm (Node 25+ ya no trae Corepack); Python 3.15.2 gestionado por uv sin tocar el Python 3.14 del sistema | Fase 1 |
+| D-23 | 06/11/2026 | Se respeta la protección de antigüedad mínima de pnpm: sin excepciones; solo `esbuild` autorizado a ejecutar scripts de instalación | Fase 1 · ADR-0001 |
+| D-24 | 06/11/2026 | Correo de Git: se mantiene el de la cuenta conectada | Operador |
 
 ## 2. Contradicciones resueltas entre los documentos originales
 
@@ -61,4 +65,4 @@ Las decisiones de arquitectura importantes tienen además su ADR en [`adr/`](adr
 | P-10 | Pruebas reproducibles para validar el calculador balístico | Fase 6 | — |
 | P-11 | Aprobar el modelo de datos de [04](04-data-model.md) | Fase 2 | Aprobar |
 | P-12 | Revisar términos de uso de las fuentes comunitarias | Fase 4 | Ya revisados por Claude (05 §2–3); el operador confirma |
-| P-13 | Instalar Node 26, Python 3.15, uv y actualizar pnpm | Fase 1 | `scripts/setup.ps1` lo guiará |
+| ~~P-13~~ | ~~Instalar Node 26, Python 3.15, uv y actualizar pnpm~~ | — | ✅ Hecho en la Fase 1 |

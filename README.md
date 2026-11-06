@@ -12,8 +12,29 @@ comunitarias), la verifica con procedencia y la resume con un **modelo de IA loc
 
 ## Estado
 
-🚧 En construcción. Fase actual: **0.5 DOCTRINA** (documentación consolidada).
+🚧 En construcción. Fase actual: **1 CIMIENTOS** (base del monorepo).
 Ver la [hoja de ruta](docs/08-roadmap.md).
+
+## Cómo empezar (Windows)
+
+Requisitos: Windows 10/11 con `winget` y Git. El script instala o verifica el resto
+(Node 26, pnpm 12, uv y Python 3.15) y crea tu `.env.development`.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\scripts\setup.ps1"
+pnpm check   # every quality check: format, lint, types, tests (JS + Python)
+pnpm dev     # API on http://127.0.0.1:4000 + panel on http://127.0.0.1:5173
+```
+
+| Comando | Qué hace |
+| --- | --- |
+| `pnpm dev` | Arranca la API y el panel en modo desarrollo |
+| `pnpm dev:api` / `pnpm dev:web` | Arranca solo uno de los dos |
+| `pnpm build` | Compila la API y el panel para producción |
+| `pnpm test` / `pnpm py:test` | Pruebas de JavaScript / Python |
+| `pnpm lint` / `pnpm py:lint` | Revisa el estilo del código |
+| `pnpm format` / `pnpm py:format` | Formatea el código automáticamente |
+| `pnpm check` | Todo lo anterior junto (debe pasar antes de cada commit) |
 
 ## Stack
 

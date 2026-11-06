@@ -45,6 +45,15 @@ Node 26 LTS · pnpm 12 · TypeScript 7 · React 19 · Vite 8 · Tailwind 4 · Ex
 Sequelize 6 (v7 aún en alpha) · Zod 4 · Vitest 5 · ESLint 10 · Python 3.15.
 Detalle y justificación: `docs/02-architecture.md` y `docs/adr/0001-latest-stable-versions.md`.
 
+## Comandos
+
+- `pnpm check` → formato, lint, tipos y pruebas (JS + Python). **Debe pasar antes de cada commit.**
+- `pnpm dev` (API :4000 + panel :5173) · `pnpm build` · `pnpm py:test` · `pnpm py:lint`.
+- En PowerShell, recargar el PATH si una herramienta recién instalada no aparece:
+  `$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')`.
+- Dependencias nuevas: versión exacta, sin excepciones a la antigüedad mínima de pnpm,
+  y `allowBuilds` solo si el paquete lo necesita de verdad.
+
 ## Convenciones de código
 
 - Código, nombres, comentarios y commits en **inglés**; documentación para el operador en español.

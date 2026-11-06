@@ -11,12 +11,12 @@ Versiones comprobadas el **06/11/2026** (se fijan exactas en `package.json` / `p
 
 | Capa | Tecnología | Versión | Nota |
 | --- | --- | --- | --- |
-| Runtime | **Node.js** | **26 LTS** (26.13.x "Lithium") | Sustituye a Node 22 de la spec original. Instalada en el equipo: 24.11 → hay que actualizar |
-| Paquetes JS | **pnpm** (workspaces) | 12.x | Instalada: 9.13 → actualizar con Corepack |
+| Runtime | **Node.js** | **26 LTS** (26.13.0 "Lithium") | Sustituye a Node 22 de la spec original. Instalada en el equipo el 06/11/2026 |
+| Paquetes JS | **pnpm** (workspaces) | 12.18.0 | Node 25+ ya no incluye Corepack → se instala con `npm install -g pnpm@12.18.0` |
 | Lenguaje | **TypeScript** (`strict`) | **6.0.3** | TS 7.0.2 ya existe, pero `typescript-eslint` solo soporta `< 6.1`. Se sube a 7 cuando el linter lo soporte |
 | Frontend | **React** | 19.3 | |
 | Build web | **Vite** + `@vitejs/plugin-react` | 8.3 / 6.2 | |
-| Estilos | **Tailwind CSS** + `@tailwindcss/vite` | 4.3 | |
+| Estilos | **Tailwind CSS** + `@tailwindcss/vite` | 4.3.4 | 4.3.5 salió el mismo día y no pasaba la protección de antigüedad mínima de pnpm (ver ADR-0001) |
 | Animaciones | **Motion** | 14.x | |
 | Rutas web | **React Router** | 8.x | No estaba en la spec original; hace falta para las 5 pantallas |
 | Datos web | **TanStack Query** | 5.x | |
@@ -26,6 +26,7 @@ Versiones comprobadas el **06/11/2026** (se fijan exactas en `package.json` / `p
 | BD desarrollo | **SQLite** (`sqlite3`) | 6.x | |
 | BD producción (opcional) | **PostgreSQL** (`pg`) | PostgreSQL 18 · `pg` 8.x | Se cambia solo con el `.env` |
 | Validación | **Zod** | 4.x | |
+| Variables de entorno (API) | `process.loadEnvFile` nativo de Node | — | Sin dependencia `dotenv`: Node 26 lo trae incorporado |
 | Seguridad HTTP | `helmet`, `cors`, `express-rate-limit`, `multer` | 8 / 2 / 8 / 2 | |
 | Calidad JS | ESLint + `typescript-eslint` + Prettier | 10 / 8.72 / 3.9 | |
 | Pruebas JS | **Vitest** | 5.x | |

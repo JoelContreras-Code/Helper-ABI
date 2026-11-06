@@ -1,0 +1,20 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    }
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "python.defaultInterpreterPath": "${workspaceFolder}/services/.venv/Scripts/python.exe",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.eol": "\n"
+}

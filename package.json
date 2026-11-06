@@ -1,0 +1,41 @@
+{
+  "name": "helper-abi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Operation Centinela: tactical intel helper for Arena Breakout: Infinite (PC)",
+  "type": "module",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=26.13.0",
+    "pnpm": ">=12.18.0"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"./apps/*\" dev",
+    "dev:api": "pnpm --filter @helper-abi/api dev",
+    "dev:web": "pnpm --filter @helper-abi/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "py:sync": "uv sync --directory services",
+    "py:lint": "uv run --directory services ruff check . && uv run --directory services ruff format --check .",
+    "py:format": "uv run --directory services ruff format .",
+    "py:test": "uv run --directory services pytest",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm py:lint && pnpm py:test"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.6.6",
+    "eslint": "10.14.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "globals": "17.14.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1"
+  }
+}

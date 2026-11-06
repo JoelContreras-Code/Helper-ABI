@@ -27,6 +27,13 @@ Usar la **última versión estable o LTS** de cada herramienta, con versión exa
 
 Nunca: `alpha`, `beta`, `rc`, `nightly` ni etiquetas `latest` sin fijar (incluidas imágenes Docker).
 
+**Protección de la cadena de suministro:** pnpm 12 bloquea por defecto los paquetes
+publicados hace muy poco (*minimum release age*). "Última estable" significa la última
+que **ya pasó** esa protección. No se añaden excepciones (`minimumReleaseAgeExclude`);
+si una versión es demasiado nueva, se usa la anterior (ej. Tailwind 4.3.4 en lugar de
+4.3.5, publicada el mismo día). Los scripts de instalación de dependencias solo se
+permiten de forma explícita (`allowBuilds` en `pnpm-workspace.yaml`; hoy: `esbuild`).
+
 ## Consecuencias
 
 - ➕ Mejor rendimiento, soporte más largo y menos migraciones futuras.
